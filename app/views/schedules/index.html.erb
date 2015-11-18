@@ -1,0 +1,7 @@
+<% @schedules.each do |schedule| %>
+  <div class='schedules-list'>
+    <div class='date'>
+      <%= link_to schedule.schedule_date, schedule %>
+    </div>
+  </div>
+<% end %>
