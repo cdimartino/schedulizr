@@ -1,0 +1,62 @@
+html, body {
+  background-color: #58595B;
+  color: #C8C8C8;
+  font-family: 'Source Sans Pro', sans-serif;
+  overflow: hidden;
+}
+
+.content h1, .content h2, .content h3 {
+  font-family: 'Droid Serif', serif;
+  font-weight: bold;
+  color: #19ABB5;
+  text-align: center;
+  width: 100%;
+}
+
+.content h1 {
+  font-size: 4em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+
+footer {
+  text-align: left;
+}
+
+footer img {
+  transform: scale(0.50, 0.50);
+  -ms-transform: scale(0.50, 0.50);
+  -webkit-transform: scale(0.50, 0.50);
+}
+
+.content {
+  width: 100%;
+}
+
+ol.schedule {
+  list-style: none;
+}
+
+ol.schedule .item {
+  font-size: 3em;
+}
+
+ol.schedule .item .left {
+  text-align: center;
+}
+
+ol.schedule .item .start_time {
+  text-align: right;
+}
+
+ol.schedule .item .end_time {
+  text-align: left;
+}
+
+ol.schedule .item .name {
+  text-align: left;
+}
+
+.row {
+  max-width: 80rem;
+}
