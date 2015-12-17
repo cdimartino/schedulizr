@@ -1,0 +1,20 @@
+<div class='activity row'>
+  <%= form_for [@schedule, activity] do |f| %>
+    <li class='item'>
+      <div class='columns large-3 time start_time'>
+        <%= f.time_field :start_time, step: 900 %>
+      </div>
+      <div class='columns large-3 time end_time'>
+        <%= f.time_field :end_time, step: 900 %>
+      </div>
+      <div class='columns large-5 name'>
+        <%= f.text_field :name, placeholder: 'Activity Title' %>
+      </div>
+      <div class='columns large-1 submit'>
+        <%= f.submit do %>
+          <a href='#' class='save-icon'><i class='fi-check'></i></a>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</div>

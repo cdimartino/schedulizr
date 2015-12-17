@@ -6,6 +6,15 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def create
+    @schedule = Schedule.new(schedule_params)
+    if @schedule.save
+      redirect_to @schedule
+    else
+      render :new
+    end
+  end
+
   def new
     @schedule = Schedule.new
   end
@@ -14,6 +23,9 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.find(params[:id])
   end
 
-  def create
+  private
+
+  def schedule_params
+    params.require(:schedule).permit(:schedule_date)
   end
 end

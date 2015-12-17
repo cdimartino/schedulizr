@@ -33,30 +33,58 @@ footer img {
   width: 100%;
 }
 
-ol.schedule {
+.schedule ol {
   list-style: none;
 }
 
-ol.schedule .item {
+.schedule ol .item {
   font-size: 3em;
 }
 
-ol.schedule .item .left {
+.schedule ol .item .left {
   text-align: center;
 }
 
-ol.schedule .item .start_time {
+.schedule ol .item .start_time {
   text-align: right;
 }
 
-ol.schedule .item .end_time {
+.schedule ol .item .end_time {
   text-align: left;
 }
 
-ol.schedule .item .name {
+.schedule ol .item .name {
   text-align: left;
 }
 
 .row {
   max-width: 80rem;
 }
+
+label {
+  color: white;
+}
+
+.schedule ol .item .edit {
+  display: none;
+}
+
+div.activity:hover div.edit  {
+  display: inline;
+}
+
+[contenteditable]:hover:not(:focus) {
+  outline: 1px dotted #ccc;
+}
+
+form ol {
+  list-style: none;
+}
+
+form input[type=button], form input[type=submit] {
+  color: black;
+}
+
+.hidden { display: none; }
+
+.changed { border: 2px dashed yellow; }

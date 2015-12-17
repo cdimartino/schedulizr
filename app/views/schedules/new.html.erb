@@ -1,14 +1,13 @@
 <h1>Add a new Schedule</h1>
 
 <%= form_for @schedule do |t| %>
-<ol class='schedule'>
-  <li>
-    <%= t.label for: :schedule_date %>
-    <%= t.date_field :schedule_date %>
-  </li>
-
-  <div id='scheduled_items' />
-
-  <%= render @schedule.activities %>
-</ol>
+  <ol class='schedule'>
+    <li>
+      <%= t.label :schedule_date %>
+      <%= t.date_field :schedule_date %>
+    </li>
+    <li>
+      <%= t.submit %>
+    </li>
+  </ol>
 <% end %>

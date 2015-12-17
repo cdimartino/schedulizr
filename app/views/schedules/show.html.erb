@@ -1,11 +1,14 @@
-<div class='schedule'>
+<div class='schedule' data-schedule-id="<%= @schedule.id %>">
   <div class='date'>
-    <%= @schedule.schedule_date %>
+    <h1><%= @schedule.display_date %></h1>
   </div>
 
   <div class='activities'>
-    <ol class='schedule'>
-      <%= render @schedule.activities %>
+    <div class='hidden' id='new-activity'>
+      <%= render partial: 'activities/form', locals: { activity: Activity.new, schedule: @schedule } %>
+    </div>
+    <ol>
+      <%= render @schedule.ordered_activities %>
     </ol>
   </div>
 </div>

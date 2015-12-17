@@ -10,13 +10,5 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
 //= require_tree .
 
-
-$(document).ready(function() {
-  var date = new Date(Date.now());
-  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-  document.getElementById('date').innerHTML = date.toLocaleDateString('en-US', options);
-})
