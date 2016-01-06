@@ -1,22 +1,24 @@
 <div class='activity row' id='activity_<%= activity.id %>' data-activity-id='<%= activity.id %>'>
-  <li class='item'>
-    <div class='columns large-6'>
+<li class='item'>
+    <div class='columns small-6'>
       <div class='row'>
-        <div class='columns large-6 time start_time' contenteditable='true'>
+        <div class='columns small-6 time start_time' contenteditable='true'>
           <%= time_format activity.start_time %>
         </div>
-        <div class='columns large-6 time end_time' contenteditable='true'>
+        <div class='columns small-6 time end_time' contenteditable='true'>
           <%= time_format activity.end_time %>
         </div>
       </div>
     </div>
-    <div class='columns large-4 name' contenteditable='true'>
+    <div class='columns small-4 name' contenteditable='true'>
       <%= activity.name %>
     </div>
-    <div class='columns large-2 edit'>
+    <div class='columns small-2 edit'>
       <a href='#' class='reset-icon' title='Reset'><i class='fi-arrow-left'></i></a>
       <a href='#' class='delete-icon' title='Delete'><i class='fi-x'></i></a>
       <a href='#' class='save-icon' title='Save'><i class='fi-check'></i></a>
     </div>
   </li>
 </div>
+
+<%= render 'clone_date.modal', locals: { schedule: @schedule } %>

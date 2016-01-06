@@ -1,18 +1,29 @@
 <div class='schedule' data-schedule-id="<%= @schedule.id %>">
   <div class='row header'>
     <h1>
-      <div class='date columns large-8 large-offset-2'>
-        <span title='Click here to add a new schedule item'><%= @schedule.display_date %></span>
+      <div class='date columns small-8 small-offset-2'>
+        <span title='Click here to add a new schedule item'>
+          <%= @schedule.display_date %>
+        </span>
       </div>
-      <div class='columns large-2 hidden edit'>
-        <a data-reveal-id='clone-date-modal' id='copy-schedule' href='#'><i class='fi-page-copy'></i></a>
+      <div class='columns small-2 hidden edit'>
+        <a title='Go to previous day.  Create a new schedule if not existing'><i class='fi-rewind'></i></a>
+        <a title='Clone this schedule' data-reveal-id='clone-date-modal' id='copy-schedule'>
+          <i class='fi-page-copy'></i>
+        </a>
+        <a title='Go to subsequent day.  Create a new schedule if not existing'><i class='fi-fast-forward'></i></a>
       </div>
     </h1>
   </div>
 
   <div class='activities'>
     <div class='hidden' id='new-activity'>
-      <%= render partial: 'activities/form', locals: { activity: Activity.new, schedule: @schedule } %>
+      <%= render partial: 'activities/form',
+                 locals: {
+                   activity: Activity.new,
+                   schedule: @schedule
+                 }
+      %>
     </div>
     <ol>
       <%= render @schedule.ordered_activities %>

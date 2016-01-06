@@ -20,6 +20,10 @@ class Schedule < ActiveRecord::Base
     end
   end
 
+  def slug
+    schedule_date.strftime('%Y-%m-%d')
+  end
+
   class << self
     def upcoming
       where(schedule_date: [3.days.ago .. Time.now + 7.days])

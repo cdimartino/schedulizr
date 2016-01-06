@@ -61,8 +61,20 @@ footer img {
   text-align: left;
 }
 
+.schedule .header .edit i {
+  font-size: 0.8em;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.schedule .header .edit i:hover {
+  cursor: pointer;
+}
+
 .row {
   max-width: 80rem;
+  /*max-width: 95%;*/
 }
 
 label {
@@ -92,3 +104,5 @@ form input[type=button], form input[type=submit] {
 .hidden { display: none; }
 
 .changed { border: 2px dashed yellow; }
+
+.date span { white-space: nowrap; }

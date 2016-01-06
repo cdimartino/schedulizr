@@ -14,6 +14,11 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def by_date
+    @schedule = Schedule.find_or_create_by(schedule_date: params[:date])
+    render :show
+  end
+
   def clone
     schedule = Schedule.find(params[:id]).dup
     cloned = schedule.deep_clone(params[:date])
