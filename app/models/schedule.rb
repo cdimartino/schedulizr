@@ -26,11 +26,11 @@ class Schedule < ActiveRecord::Base
 
   class << self
     def upcoming
-      where(schedule_date: [3.days.ago .. Time.now + 7.days])
+      where(schedule_date: [3.days.ago .. Time.now + 7.days]).order(:schedule_date)
     end
 
     def around
-      where(schedule_date: [14.days.ago .. Time.now + 14.days])
+      where(schedule_date: [14.days.ago .. Time.now + 14.days]).order(:schedule_date)
     end
 
     def today
