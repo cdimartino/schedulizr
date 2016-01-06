@@ -22,8 +22,10 @@ class SchedulesController < ApplicationController
   def clone
     schedule = Schedule.find(params[:id]).dup
     cloned = schedule.deep_clone(params[:date])
-    if clone.save
-      redirect_to clone
+    if cloned.save
+      redirect_to cloned.slug
+    else
+      #TODO: Allow user to overwrite when cloning?
     end
   end
 

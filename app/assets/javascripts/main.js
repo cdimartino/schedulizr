@@ -63,6 +63,16 @@ $(document).ready(function() {
   $('h1 .date').on('click', function(event) {
     $('#new-activity').toggle();
   });
+
+  $('#prior-day').on('click', function(event) {
+    var schedule = Schedulizer(event.target);
+    window.location.replace(schedule.prior_slug());
+  });
+
+  $('#next-day').on('click', function(event) {
+    var schedule = Schedulizer(event.target);
+    window.location.replace(schedule.next_slug());
+  });
 });
 
 function Activity(el) {
@@ -73,6 +83,14 @@ function Schedule(el) {
   Object.assign(this, el);
 }
 
+Schedule.prototype.prior_slug = function() {
+  return moment(this.schedule_date).subtract(1, 'days').format('YYYY-MM-DD')
+};
+
+Schedule.prototype.next_slug = function() {
+  return moment(this.schedule_date).add(1, 'days').format('YYYY-MM-DD')
+};
+
 function Activitizer(el) {
   el = $(el).closest('.activity');
   return new Activity({
@@ -82,6 +100,10 @@ function Activitizer(el) {
     name:       el.find('.name').html().trim()
   });
 }
+
 function Schedulizer(el) {
-  return new Schedule({id: $(el).closest('.schedule').data('schedule-id')});
+  return new Schedule({
+    id: $(el).closest('.schedule').data('schedule-id'),
+    schedule_date: $(el).closest('.schedule').data('schedule-date')
+  });
 }
