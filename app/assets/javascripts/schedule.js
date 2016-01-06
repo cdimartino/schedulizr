@@ -12,8 +12,10 @@ Schedule.prototype.next_slug = function() {
 
 
 function Schedulizer(el) {
+  var sched = $(el).closest('.schedule');
   return new Schedule({
-    id: $(el).closest('.schedule').data('schedule-id'),
-    schedule_date: $(el).closest('.schedule').data('schedule-date')
+    id: sched.data('schedule-id'),
+    schedule_date: sched.data('schedule-date'),
+    activities: Activitizer.from_schedule_element(sched[0], this)
   });
 }
