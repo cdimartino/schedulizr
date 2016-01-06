@@ -1,37 +1,44 @@
-function ScheduleView(target, schedule) {
+function ScheduleView(target, schedule, detailView) {
   this.target = target;
   this.schedule = schedule;
+  this.detailView = detailView;
+}
+
+ScheduleView.prototype.bind = function(event, callback) {
+  if (event == 'activity_changed') {
+    $(this.target).on('input', 'div[contenteditable=true]', function(event) {
+      callback(ActivityFactory(event.target));
+    });
+  }
+  else if ( event == 'activity_saved') {
+    $(this.target).on('click', '.save-icon', function(event) {
+      callback(ActivityFactory(event.target));
+    });
+  }
+}
+
+ScheduleView.prototype.setChanged = function(activity) {
+  $('#activity-' + activity.id).addClass('changed');
+}
+
+ScheduleView.prototype.unsetChanged = function(activity) {
+  $('#activity-' + activity.id).removeClass('changed');
+}
+
+ScheduleView.prototype.setSaved = function(activity) {
+  this.unsetChanged(activity);
+  $("#activity-" + activity.id).effect('highlight', { color: 'green' }, 2000);
 }
 
 ScheduleView.prototype.wireEvents = function() {
-  $(this.target).on('input', 'div[contenteditable=true]', function(event) {
-    $(event.target).closest('.activity').addClass('changed');
-  });
-
   $('#clone-date-modal').on('click', 'form .save', function(event) {
     var form = $(event.target).closest('form')[0];
     form.submit();
   });
 
-  $(this.target).on('click', '.save-icon', function(event) {
-    var schedule = Schedulizer(event.target);
-    var activity = Activitizer(event.target);
-
-    $.ajax({
-      method: 'PUT',
-      url: '/schedules/' + schedule.id + '/activities/' + activity.id,
-      data: { activity: activity }
-    }).done(function(response) {
-      $("#activity_" + response.id).effect('highlight', { color: 'green' }, 2000);
-      $("#activity_" + response.id).removeClass('changed');
-    }).fail(function(error) {
-      $("#activity_" + response.id).effect('highlight', { color: 'red' }, 2000);
-    });
-  });
-
   $(this.target).on('click', '.delete-icon', function(event) {
-    var schedule = Schedulizer(event.target);
-    var activity = Activitizer(event.target);
+    var schedule = ScheduleFactory(event.target);
+    var activity = ActivityFactory(event.target);
 
     $.ajax({
       method: 'delete',
@@ -71,13 +78,13 @@ ScheduleView.prototype.wireEvents = function() {
   });
 
   $('#prior-day').on('click', function(event) {
-    var schedule = Schedulizer(event.target);
+    var schedule = ScheduleFactory(event.target);
     window.location.replace("/" + schedule.prior_slug());
   });
 
   $('#next-day').on('click', function(event) {
-    var schedule = Schedulizer(event.target);
+    var schedule = ScheduleFactory(event.target);
     window.location.replace("/" + schedule.next_slug());
   });
-}
+};
 
