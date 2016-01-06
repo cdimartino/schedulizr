@@ -1,0 +1,3 @@
+function ScheduleView(target, activities) {
+
+}

@@ -1,4 +1,10 @@
+function Controller(target) {
+  this.target = target
+}
+
 $(document).ready(function() {
+  var controller = new Controller($('.activities')[0]);
+
   $('.activities').on('input', 'div[contenteditable=true]', function(event) {
     $(event.target).closest('.activity').addClass('changed');
   });
@@ -74,36 +80,3 @@ $(document).ready(function() {
     window.location.replace(schedule.next_slug());
   });
 });
-
-function Activity(el) {
-  Object.assign(this, el);
-}
-
-function Schedule(el) {
-  Object.assign(this, el);
-}
-
-Schedule.prototype.prior_slug = function() {
-  return moment(this.schedule_date).subtract(1, 'days').format('YYYY-MM-DD')
-};
-
-Schedule.prototype.next_slug = function() {
-  return moment(this.schedule_date).add(1, 'days').format('YYYY-MM-DD')
-};
-
-function Activitizer(el) {
-  el = $(el).closest('.activity');
-  return new Activity({
-    id:         el.data('activity-id'),
-    start_time: el.find('.start_time').html().trim(),
-    end_time:   el.find('.end_time').html().trim(),
-    name:       el.find('.name').html().trim()
-  });
-}
-
-function Schedulizer(el) {
-  return new Schedule({
-    id: $(el).closest('.schedule').data('schedule-id'),
-    schedule_date: $(el).closest('.schedule').data('schedule-date')
-  });
-}
