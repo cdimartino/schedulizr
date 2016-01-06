@@ -50,16 +50,17 @@ $(document).ready(function() {
     el.closest('.activity').removeClass('changed');
   });
 
-  $('#new_activity').on('click', 'button', function(event) {
-    var form = $(event.target).closest('form')[0];
+  $('#new_activity').on('submit', function(event) {
+    event.preventDefault();
+    // var form = $(event.target).closest('form')[0];
 
     $.ajax({
-      method: form.method,
-      url: form.action,
-      data: $(form).serialize(),
+      method: event.target.method,
+      url: event.target.action,
+      data: $(event.target).serialize(),
       dataType: 'html'
     }).done(function(response) {
-      $(form)[0].reset();
+      $(event.target)[0].reset();
       $('.activities > ol').append(response);
     }).fail(function(error) {
       console.log("Could not add an activity");
@@ -72,11 +73,11 @@ $(document).ready(function() {
 
   $('#prior-day').on('click', function(event) {
     var schedule = Schedulizer(event.target);
-    window.location.replace(schedule.prior_slug());
+    window.location.replace("/" + schedule.prior_slug());
   });
 
   $('#next-day').on('click', function(event) {
     var schedule = Schedulizer(event.target);
-    window.location.replace(schedule.next_slug());
+    window.location.replace("/" + schedule.next_slug());
   });
 });
