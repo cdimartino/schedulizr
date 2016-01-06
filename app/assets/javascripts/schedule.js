@@ -1,5 +1,5 @@
-function Schedule(el) {
-  Object.assign(this, el);
+function Schedule(obj) {
+  Object.assign(this, obj);
 }
 
 Schedule.prototype.prior_slug = function() {
@@ -11,11 +11,12 @@ Schedule.prototype.next_slug = function() {
 };
 
 
-function Schedulizer(el) {
+function ScheduleFactory(el) {
   var sched = $(el).closest('.schedule');
-  return new Schedule({
+  var sched = new Schedule({
     id: sched.data('schedule-id'),
     schedule_date: sched.data('schedule-date'),
-    activities: Activitizer.from_schedule_element(sched[0], this)
   });
+  sched.activities = ActivityFactory.from_schedule_element(sched[0], sched)
+  return sched;
 }
