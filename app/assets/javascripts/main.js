@@ -19,5 +19,5 @@ function Controller(view) {
 function refresh() {
   return setTimeout(function() {
     location.reload();
-  }, 60000);
+  }, 30000);
 }
