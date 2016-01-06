@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'schedules#index'
+  root 'schedules#today'
 
   get '/today', to: 'schedules#today'
 
