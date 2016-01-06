@@ -60,7 +60,7 @@ ScheduleView.prototype.wireEvents = function() {
       dataType: 'html'
     }).done(function(response) {
       $(event.target)[0].reset();
-      $(this.target + ' > ol').append(response);
+      $('.activities > ol').append(response);
     }).fail(function(error) {
       console.log("Could not add an activity");
     });
