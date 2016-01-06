@@ -1,15 +1,16 @@
 $(document).ready(function() {
-  // var date = new Date(Date.now());
-  // var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-  // document.getElementById('date').innerHTML = date.toLocaleDateString('en-US', options);
-
   $('.activities').on('input', 'div[contenteditable=true]', function(event) {
     $(event.target).closest('.activity').addClass('changed');
   });
 
+  $('#clone-date-modal').on('click', 'form .save', function(event) {
+    var form = $(event.target).closest('form')[0];
+    form.submit();
+  });
+
   $('.activities').on('click', '.save-icon', function(event) {
-    var schedule = new Schedule(event.target);
-    var activity = new Activity(event.target);
+    var schedule = Schedulizer(event.target);
+    var activity = Activitizer(event.target);
 
     $.ajax({
       method: 'PUT',
@@ -24,8 +25,8 @@ $(document).ready(function() {
   });
 
   $('.activities').on('click', '.delete-icon', function(event) {
-    var schedule = new Schedule(event.target);
-    var activity = new Activity(event.target);
+    var schedule = Schedulizer(event.target);
+    var activity = Activitizer(event.target);
 
     $.ajax({
       method: 'delete',
@@ -34,7 +35,7 @@ $(document).ready(function() {
     }).done(function(response) {
       $(event.target).closest('.activity').remove();
     }).fail(function(error) {
-      console.log("error!")
+      console.log("error!");
     });
   });
 
@@ -43,38 +44,44 @@ $(document).ready(function() {
     el.closest('.activity').removeClass('changed');
   });
 
-  $('#new_activity').on('submit', function(event) {
-    event.preventDefault();
+  $('#new_activity').on('click', 'button', function(event) {
+    var form = $(event.target).closest('form')[0];
+
     $.ajax({
-      method: event.target.method,
-      url: event.target.action,
-      data: $(event.target).serialize(),
+      method: form.method,
+      url: form.action,
+      data: $(form).serialize(),
       dataType: 'html'
     }).done(function(response) {
-      $(event.target)[0].reset();
-      // make this work!
-      // $(event.target).find('input[type=time]')[0].focus()
+      $(form)[0].reset();
       $('.activities > ol').append(response);
     }).fail(function(error) {
-      console.log("Could not add an activity")
-    })
-  })
+      console.log("Could not add an activity");
+    });
+  });
 
-  $('.date h1').on('mouseover', function(event) {
-    console.log('hovered')
+  $('h1 .date').on('click', function(event) {
     $('#new-activity').toggle();
-  })
+  });
 });
 
 function Activity(el) {
-  var el = $(el).closest('.activity');
-
-  this.id =         el.data('activity-id');
-  this.start_time = el.find('.start_time').html().trim();
-  this.end_time =   el.find('.end_time').html().trim();
-  this.name =       el.find('.name').html().trim();
+  Object.assign(this, el);
 }
 
-Schedule = function(el) {
-  this.id = $(el).closest('.schedule').data('schedule-id');
+function Schedule(el) {
+  Object.assign(this, el);
+}
+
+function Activitizer(el) {
+  el = $(el).closest('.activity');
+  return new Activity({
+    id:         el.data('activity-id'),
+    start_time: el.find('.start_time').html().trim(),
+    end_time:   el.find('.end_time').html().trim(),
+    name:       el.find('.name').html().trim()
+  });
+}
+function Schedulizer(el) {
+  return new Schedule({id: $(el).closest('.schedule').data('schedule-id')});
 }

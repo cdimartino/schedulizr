@@ -1,18 +1,28 @@
 class SchedulesController < ApplicationController
   def index
-    @schedules = Schedule.upcoming
+    @schedules = Schedule.around
     if @schedules.empty?
       redirect_to action: "new"
     end
   end
 
-  def create
-    @schedule = Schedule.new(schedule_params)
-    if @schedule.save
-      redirect_to @schedule
+  def today
+    if @schedule = Schedule.today
+      render :show
     else
-      render :new
+      redirect_to action: "new"
     end
+  end
+
+  def clone
+    schedule = Schedule.find(params[:id]).dup
+    cloned = schedule.deep_clone(params[:date])
+    if clone.save
+      redirect_to clone
+    end
+  end
+
+  def create
   end
 
   def new

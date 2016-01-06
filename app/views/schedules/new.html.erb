@@ -4,7 +4,7 @@
   <ol class='schedule'>
     <li>
       <%= t.label :schedule_date %>
-      <%= t.date_field :schedule_date %>
+      <%= t.date_field :schedule_date, value: Date.today %>
     </li>
     <li>
       <%= t.submit %>

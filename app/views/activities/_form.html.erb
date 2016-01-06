@@ -1,6 +1,5 @@
 <div class='activity row'>
   <%= form_for [@schedule, activity] do |f| %>
-    <li class='item'>
       <div class='columns large-3 time start_time'>
         <%= f.time_field :start_time, step: 900 %>
       </div>
@@ -11,10 +10,7 @@
         <%= f.text_field :name, placeholder: 'Activity Title' %>
       </div>
       <div class='columns large-1 submit'>
-        <%= f.submit do %>
-          <a href='#' class='save-icon'><i class='fi-check'></i></a>
-        <% end %>
+        <button type="button" class="xsm btn-labeled radius"><span class="btn-label"><i class="icon-ok"></i></span>Add</button>
       </div>
-    </li>
   <% end %>
 </div>

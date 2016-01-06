@@ -19,6 +19,10 @@ html, body {
   margin-bottom: 0.5em;
 }
 
+h1 .date:hover {
+  cursor: pointer;
+}
+
 footer {
   text-align: left;
 }
@@ -69,7 +73,7 @@ label {
   display: none;
 }
 
-div.activity:hover div.edit  {
+div.activity:hover div.edit, div.header:hover div.edit  {
   display: inline;
 }
 
