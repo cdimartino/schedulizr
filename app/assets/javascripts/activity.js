@@ -3,6 +3,7 @@ function Activity(obj) {
   this.end_time = obj.end_time;
   this.name = obj.name;
   this.id = obj.id;
+  this.schedule = obj.schedule;
 }
 
 Activity.prototype.to_json = function() {
