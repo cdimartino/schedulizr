@@ -1,7 +1,7 @@
 function Controller(view) {
   this.view = view;
   this.wireEvents();
-  this.refreshInterval = 60000;
+  this.refreshInterval = 10000;
   this.autoRefreshActivities();
 }
 

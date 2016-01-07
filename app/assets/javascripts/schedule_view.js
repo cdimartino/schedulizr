@@ -85,7 +85,3 @@ ScheduleView.prototype.deleteActivity = function(req, activity) {
     $('#activity-' + activity.id).remove();
   });
 };
-
-ScheduleView.prototype.reloadActivities = function() {
-
-}
