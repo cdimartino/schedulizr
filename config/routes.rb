@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :schedules do
     member do
-      patch 'clone'
+      post 'clone'
     end
 
     resources :activities
