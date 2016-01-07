@@ -20,13 +20,16 @@ class SchedulesController < ApplicationController
   end
 
   def clone
+    if target = Schedule.find_by(schedule_date: params[:date])
+      ## The target schedule date exists.  Delete and allow it to be cloned.
+      target.destroy
+    end
+
     schedule = Schedule.find(params[:id])
     cloned = schedule.deep_clone(params[:date])
 
     if cloned.save
       redirect_to "/#{cloned.slug}"
-    else
-      #TODO: Allow user to overwrite when cloning?
     end
   end
 
