@@ -16,6 +16,19 @@ ScheduleView.prototype.bind = function(event, callback) {
         callback(ActivityFactory(event.target));
       });
       break;
+
+    case 'toggle_new_activity':
+      $('h1 .date').on('click', function(event) {
+        $('#new-activity').toggle();
+      });
+      break;
+
+    case 'activity_created':
+      $('#new_activity').on('submit', function(event) {
+        event.preventDefault();
+        callback(event.target);
+      });
+      break;
   }
 }
 
@@ -30,6 +43,13 @@ ScheduleView.prototype.unsetChanged = function(activity) {
 ScheduleView.prototype.setSaved = function(activity) {
   this.unsetChanged(activity);
   $("#activity-" + activity.id).effect('highlight', { color: 'green' }, 2000);
+}
+
+ScheduleView.prototype.addActivity = function(req, target) {
+  req.done(function(response) {
+    $(target)[0].reset();
+    $('.activities > ol').append(response);
+  })
 }
 
 ScheduleView.prototype.wireEvents = function() {
@@ -53,26 +73,6 @@ ScheduleView.prototype.wireEvents = function() {
     el.closest('.activity').removeClass('changed');
   });
 
-  $('#new_activity').on('submit', function(event) {
-    event.preventDefault();
-    // var form = $(event.target).closest('form')[0];
-
-    $.ajax({
-      method: event.target.method,
-      url: event.target.action,
-      data: $(event.target).serialize(),
-      dataType: 'html'
-    }).done(function(response) {
-      $(event.target)[0].reset();
-      $('.activities > ol').append(response);
-    }).fail(function(error) {
-      console.log("Could not add an activity");
-    });
-  });
-
-  $('h1 .date').on('click', function(event) {
-    $('#new-activity').toggle();
-  });
 
   $('#prior-day').on('click', function(event) {
     var schedule = ScheduleFactory(event.target);
