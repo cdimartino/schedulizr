@@ -1,7 +1,7 @@
 function Controller(view) {
   this.view = view;
   this.wireEvents();
-  this.refreshInterval = 5000;
+  this.refreshInterval = 60000;
   this.autoRefreshActivities();
 }
 
@@ -22,7 +22,6 @@ Controller.prototype.autoRefreshActivities = function() {
 };
 
 Controller.prototype.refreshActivities = function() {
-  console.log("Refreshing the activities")
   var schedule = ScheduleFactory($('.schedule')[0]);
   $.ajax({
     url: '/schedules/' + schedule.id + '/activities',

@@ -1,5 +1,6 @@
 function Schedule(obj) {
-  Object.assign(this, obj);
+  this.id = obj.id;
+  this.schedule_date = obj.schedule_date;
 }
 
 Schedule.prototype.prior_slug = function() {

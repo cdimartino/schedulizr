@@ -1,5 +1,8 @@
 function Activity(obj) {
-  Object.assign(this, obj);
+  this.start_time = obj.start_time;
+  this.end_time = obj.end_time;
+  this.name = obj.name;
+  this.id = obj.id;
 }
 
 Activity.prototype.to_json = function() {
