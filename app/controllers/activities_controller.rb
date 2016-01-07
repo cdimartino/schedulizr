@@ -1,4 +1,9 @@
 class ActivitiesController < ActionController::Base
+  def index
+    activities = Schedule.find(params[:schedule_id]).activities.order(:start_time)
+    render json: activities
+  end
+
   def update
     @activity = Activity.find_by(id: params[:id])
     if @activity.update(activity_params)
