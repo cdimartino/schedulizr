@@ -29,6 +29,20 @@ ScheduleView.prototype.bind = function(event, callback) {
         callback(event.target);
       });
       break;
+
+    case 'next_day':
+      $('#next-day').on('click', function(event) {
+        var schedule = ScheduleFactory(event.target);
+        window.location.replace("/" + schedule.next_slug());
+      });
+      break;
+
+    case 'prior_day':
+      $('#prior-day').on('click', function(event) {
+        var schedule = ScheduleFactory(event.target);
+        window.location.replace("/" + schedule.prior_slug());
+      });
+      break;
   }
 }
 
@@ -71,17 +85,6 @@ ScheduleView.prototype.wireEvents = function() {
   $(this.target).on('click', '.reset-icon', function(event) {
     var el = $(event.target);
     el.closest('.activity').removeClass('changed');
-  });
-
-
-  $('#prior-day').on('click', function(event) {
-    var schedule = ScheduleFactory(event.target);
-    window.location.replace("/" + schedule.prior_slug());
-  });
-
-  $('#next-day').on('click', function(event) {
-    var schedule = ScheduleFactory(event.target);
-    window.location.replace("/" + schedule.next_slug());
   });
 };
 
