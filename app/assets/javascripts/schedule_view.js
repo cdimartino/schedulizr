@@ -11,6 +11,7 @@ ScheduleView.prototype.bind = function(event, callback) {
         callback(ActivityFactory(event.target));
       });
       break;
+
     case 'activity_saved':
       $(this.target).on('click', '.save-icon', function(event) {
         callback(ActivityFactory(event.target));
@@ -26,7 +27,13 @@ ScheduleView.prototype.bind = function(event, callback) {
     case 'activity_created':
       $('#new_activity').on('submit', function(event) {
         event.preventDefault();
-        callback(event.target);
+        callback(event);
+      });
+      break;
+
+    case 'activity_deleted':
+      $(this.target).on('click', '.delete-icon', function(event) {
+        callback(ActivityFactory(event.target));
       });
       break;
 
@@ -66,22 +73,13 @@ ScheduleView.prototype.addActivity = function(req, target) {
   })
 }
 
-ScheduleView.prototype.wireEvents = function() {
-  $(this.target).on('click', '.delete-icon', function(event) {
-    var schedule = ScheduleFactory(event.target);
-    var activity = ActivityFactory(event.target);
-
-    $.ajax({
-      method: 'delete',
-      url: '/schedules/' + schedule.id + '/activities/' + activity.id,
-      dataType: 'json'
-    }).done(function(response) {
-      $(event.target).closest('.activity').remove();
-    }).fail(function(error) {
-      console.log("error!");
-    });
+ScheduleView.prototype.deleteActivity = function(req, activity) {
+  req.done(function() {
+    $('#activity-' + activity.id).remove();
   });
+}
 
+ScheduleView.prototype.wireEvents = function() {
   $(this.target).on('click', '.reset-icon', function(event) {
     var el = $(event.target);
     el.closest('.activity').removeClass('changed');
