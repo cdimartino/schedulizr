@@ -1,26 +1,40 @@
 function Controller(view) {
   this.view = view;
   this.wireEvents();
-  this.refreshInterval = 5000;
+  this.refreshInterval = 60000;
   this.autoRefreshActivities();
 }
 
-Controller.prototype.autoRefresh = function() {
-  var refresher = refresh.call(this);
-  $(document).on('mousemove', function() {
+Controller.prototype.autoRefreshActivities = function() {
+  var controller = this;
+  var refresher = refresh();
+  $(document).on('mousemove input keypress', function() {
     clearTimeout(refresher);
-    refresher = refresh.call(this);
+    refresher = refresh();
   });
 
   function refresh() {
     return setTimeout(function() {
-      this.view.reloadActivities();
-    }.bind(this), this.refreshInterval);
-  }.bind(this);
+      controller.refreshActivities();
+      refresher = refresh();
+    }, controller.refreshInterval);
+  }
+};
+
+Controller.prototype.refreshActivities = function() {
+  var schedule = ScheduleFactory($('.schedule')[0]);
+  $.ajax({
+    url: '/schedules/' + schedule.id + '/activities',
+    dataType: 'html'
+  }).then(function(response) {
+    $('#activities').html(response);
+  }).fail(function(error) {
+    console.log("Could not refresh activities");
+  });
 };
 
 Controller.prototype.wireEvents = function() {
-  this.view.bind('activity_changed', this.notifyActivityChanged.bind(this));
+  this.view.bind('activity_changed');
   this.view.bind('activity_saved', this.notifyActivitySaveAttempt.bind(this));
   this.view.bind('activity_created', this.notifyActivityCreateAttempt.bind(this));
   this.view.bind('activity_deleted', this.notifyActivityDeleteAttempt.bind(this));

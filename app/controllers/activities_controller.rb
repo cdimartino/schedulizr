@@ -1,7 +1,10 @@
 class ActivitiesController < ActionController::Base
   def index
     activities = Schedule.find(params[:schedule_id]).activities.order(:start_time)
-    render json: activities
+    respond_to do |fmt|
+      fmt.json { render json: activities }
+      fmt.html { render activities }
+    end
   end
 
   def update
