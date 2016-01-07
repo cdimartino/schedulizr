@@ -18,6 +18,7 @@ function Controller(view) {
 Controller.prototype.wireEvents = function() {
   this.view.bind('activity_changed', this.notifyActivityChanged.bind(this));
   this.view.bind('activity_saved', this.notifyActivitySaveAttempt.bind(this));
+  this.view.bind('clone_schedule');
 }
 
 Controller.prototype.notifyActivityChanged = function(activity) {

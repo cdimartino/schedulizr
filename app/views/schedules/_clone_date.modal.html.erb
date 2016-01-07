@@ -1,8 +1,10 @@
 <div id="clone-date-modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog" data-schedule-id="<%= @schedule.id %>">
   <h2 id="modalTitle">Please enter a date:  </h2>
-  <%= form_for [:clone, @schedule] do |f| %>
+  <%= form_for [:clone, @schedule], method: 'post' do |f| %>
     <input type='date' name='date' />
-    <a class='save' href='#' class='save-icon' title='Save'><i class='fi-check'></i></a>
+    <button type='submit' title='save'>
+      <i class='fi-check'></i>
+    </button>
   <% end %>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>

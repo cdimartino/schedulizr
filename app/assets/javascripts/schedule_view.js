@@ -5,15 +5,17 @@ function ScheduleView(target, schedule, detailView) {
 }
 
 ScheduleView.prototype.bind = function(event, callback) {
-  if (event == 'activity_changed') {
-    $(this.target).on('input', 'div[contenteditable=true]', function(event) {
-      callback(ActivityFactory(event.target));
-    });
-  }
-  else if ( event == 'activity_saved') {
-    $(this.target).on('click', '.save-icon', function(event) {
-      callback(ActivityFactory(event.target));
-    });
+  switch(event) {
+    case 'activity_changed':
+      $(this.target).on('input', 'div[contenteditable=true]', function(event) {
+        callback(ActivityFactory(event.target));
+      });
+      break;
+    case 'activity_saved':
+      $(this.target).on('click', '.save-icon', function(event) {
+        callback(ActivityFactory(event.target));
+      });
+      break;
   }
 }
 
@@ -31,11 +33,6 @@ ScheduleView.prototype.setSaved = function(activity) {
 }
 
 ScheduleView.prototype.wireEvents = function() {
-  $('#clone-date-modal').on('click', 'form .save', function(event) {
-    var form = $(event.target).closest('form')[0];
-    form.submit();
-  });
-
   $(this.target).on('click', '.delete-icon', function(event) {
     var schedule = ScheduleFactory(event.target);
     var activity = ActivityFactory(event.target);
