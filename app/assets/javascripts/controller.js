@@ -23,14 +23,13 @@ Controller.prototype.autoRefreshActivities = function() {
 
 Controller.prototype.refreshActivities = function() {
   var schedule = ScheduleFactory($('.schedule')[0]);
-  $.ajax({
+  var req = $.ajax({
     url: '/schedules/' + schedule.id + '/activities',
     dataType: 'html'
-  }).then(function(response) {
-    $('#activities').html(response);
   }).fail(function(error) {
     console.log("Could not refresh activities");
   });
+  this.view.redrawActivities(req);
 };
 
 Controller.prototype.wireEvents = function() {
