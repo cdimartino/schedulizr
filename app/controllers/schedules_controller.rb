@@ -1,8 +1,21 @@
 class SchedulesController < ApplicationController
   def index
-    @schedules = Schedule.around
+    @schedules = if params[:start] and params[:end]
+      Schedule.between(
+        Date.strptime(params[:start], '%s'),
+        Date.strptime(params[:end], '%s')
+      )
+    else
+      Schedule.around
+    end
+
     if @schedules.empty?
       redirect_to action: "new"
+    end
+
+    respond_to do |fmt|
+      fmt.html
+      fmt.json { render json: @schedules.to_json(include: [:activities]) }
     end
   end
 

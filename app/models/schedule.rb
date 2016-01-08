@@ -36,5 +36,9 @@ class Schedule < ActiveRecord::Base
     def today
       find_by(schedule_date: Date.today)
     end
+
+    def between start_date, end_date
+      where(schedule_date: [start_date .. end_date]).includes(:activities)
+    end
   end
 end
