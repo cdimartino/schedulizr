@@ -15,7 +15,7 @@ Controller.prototype.autoRefreshActivities = function() {
 
   function refresh() {
     return setTimeout(function() {
-      var today = moment().format('YYYYMMDD');
+      var today = moment().format('YYYY-MM-DD');
       if (last_refreshed_at != today) {
         window.location.replace('/' + today);
       }
