@@ -25,6 +25,8 @@ h1 .date:hover {
 
 footer {
   text-align: left;
+  position: absolute;
+  bottom: 0;
 }
 
 footer img {
