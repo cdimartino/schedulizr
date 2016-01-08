@@ -109,3 +109,6 @@ form input[type=button], form input[type=submit] {
 .changed { border: 2px dashed yellow; }
 
 .date span { white-space: nowrap; }
+
+#activities div.activity { border-bottom: 1px dashed #19ABB5;}
+#activities div.activity:last-child { border-bottom: none;}
