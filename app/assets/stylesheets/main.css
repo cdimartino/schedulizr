@@ -60,6 +60,10 @@ footer img {
   text-align: left;
 }
 
+.schedule ol .spacer {
+  text-align: center;
+}
+
 .schedule ol .item .name {
   text-align: left;
 }

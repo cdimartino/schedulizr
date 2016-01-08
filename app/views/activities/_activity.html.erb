@@ -2,10 +2,11 @@
 <li class='item'>
     <div class='columns small-6'>
       <div class='row'>
-        <div class='columns small-6 time start_time' contenteditable='true'>
+        <div class='columns small-5 time start_time' contenteditable='true'>
           <%= time_format activity.start_time %>
         </div>
-        <div class='columns small-6 time end_time' contenteditable='true'>
+        <div class='columns small-2 spacer'>&mdash;</div>
+        <div class='columns small-5 time end_time' contenteditable='true'>
           <%= time_format activity.end_time %>
         </div>
       </div>
