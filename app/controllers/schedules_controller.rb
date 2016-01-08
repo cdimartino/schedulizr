@@ -38,7 +38,13 @@ class SchedulesController < ApplicationController
       target.destroy
     end
 
-    schedule = Schedule.find(params[:id])
+    schedule = \
+      if params[:id].match(/^\d\d\d\d-\d\d-\d\d$/)
+        Schedule.find_by(schedule_date: params[:id])
+      else
+        Schedule.find(params[:id])
+      end
+
     cloned = schedule.deep_clone(params[:date])
 
     if cloned.save

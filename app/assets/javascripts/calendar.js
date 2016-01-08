@@ -7,8 +7,26 @@ $(document).ready(function() {
         center: 'title',
         right: ''
       },
-      editable: false,
+      editable: true,
       eventLimit: false, // allow "more" link when too many events
+      eventDrop: function(event, delta, revertFunc) {
+        var initial_date = moment(event.start - delta).add(1, 'days').format('YYYY-MM-DD');
+        $.ajax({
+          url: "/schedules/" + initial_date + "/clone",
+          beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
+          },
+          data: {
+            date: event.start.format('YYYY-MM-DD')
+          },
+          method: 'post'
+        }).done(function(response) {
+          $('#calendar').fullCalendar('refetchEvents')
+        }).fail(function(err) {
+          alert("Could not clone")
+        })
+      },
+
       events: function(start, end, timezone, callback) {
         $.ajax({
           url: '/schedules.json',
