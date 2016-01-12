@@ -68,6 +68,10 @@ footer img {
   text-align: left;
 }
 
+.schedule ol .item .edit {
+  white-space: nowrap;
+}
+
 .schedule .header .edit i {
   font-size: 0.8em;
   padding: 0;
