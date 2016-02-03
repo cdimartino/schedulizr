@@ -1,19 +1,21 @@
 <div class='schedule' data-schedule-id="<%= @schedule.id %>" data-schedule-date="<%= @schedule.slug %>">
-  <div class='row header'>
-    <h1>
-      <div class='date columns small-8 small-offset-2'>
-        <span title='Click here to add a new schedule item'>
-          <%= @schedule.display_date %>
-        </span>
-      </div>
-      <div class='columns small-2 hidden edit'>
-        <a title='Go to previous day.  Create a new schedule if not existing' id='prior-day'><i class='fi-rewind'></i></a>
-        <a title='Clone this schedule' data-reveal-id='clone-date-modal' id='copy-schedule'>
-          <i class='fi-page-copy'></i>
-        </a>
-        <a title='Go to subsequent day.  Create a new schedule if not existing' id='next-day'><i class='fi-fast-forward'></i></a>
-      </div>
-    </h1>
+  <div class='header'>
+    <div class='row header'>
+      <h1>
+        <div class='date columns small-7 small-offset-1'>
+          <span title='Click here to add a new schedule item'>
+            <%= @schedule.display_date %> &#x023F1 <span class='clock'></span>
+          </span>
+        </div>
+        <div class='columns small-4 hidden edit'>
+          <a title='Go to previous day.  Create a new schedule if not existing' id='prior-day'><i class='fi-rewind'></i></a>
+          <a title='Clone this schedule' data-reveal-id='clone-date-modal' id='copy-schedule'>
+            <i class='fi-page-copy'></i>
+          </a>
+          <a title='Go to subsequent day.  Create a new schedule if not existing' id='next-day'><i class='fi-fast-forward'></i></a>
+        </div>
+      </h1>
+    </div>
   </div>
 
   <div class='activities'>

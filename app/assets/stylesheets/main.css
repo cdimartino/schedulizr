@@ -1,12 +1,15 @@
+* {
+  /*border: 1px solid black;*/
+  font-family: 'Droid Serif', serif;
+}
+
 html, body {
   background-color: #58595B;
   color: #C8C8C8;
-  font-family: 'Source Sans Pro', sans-serif;
   overflow: hidden;
 }
 
 .content h1, .content h2, .content h3 {
-  font-family: 'Droid Serif', serif;
   font-weight: bold;
   color: #19ABB5;
   text-align: center;
@@ -14,7 +17,7 @@ html, body {
 }
 
 .content h1 {
-  font-size: 4em;
+  font-size: 3.3em;
   margin-top: 0;
   margin-bottom: 0.5em;
   line-height: 2em;
@@ -22,18 +25,6 @@ html, body {
 
 h1 .date:hover {
   cursor: pointer;
-}
-
-footer {
-  text-align: left;
-  position: absolute;
-  bottom: 0;
-}
-
-footer img {
-  transform: scale(0.50, 0.50);
-  -ms-transform: scale(0.50, 0.50);
-  -webkit-transform: scale(0.50, 0.50);
 }
 
 .content {
@@ -120,3 +111,15 @@ form input[type=button], form input[type=submit] {
 
 #activities div.activity { border-bottom: 1px dashed #19ABB5;}
 #activities div.activity:last-child { border-bottom: none;}
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
+footer img {
+  transform: scale(0.50, 0.50);
+  -ms-transform: scale(0.50, 0.50);
+  -webkit-transform: scale(0.50, 0.50);
+}
+

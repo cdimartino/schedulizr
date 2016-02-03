@@ -1,5 +1,4 @@
 var last_refreshed_at;
-last_interval = 0;
 $(document).ready(function() {
   last_refreshed_at = moment().format('YYYY-MM-DD');
   if ($('.schedule').length > 0) {
@@ -7,9 +6,5 @@ $(document).ready(function() {
     var controller = new Controller(view);
   }
 
-  // setInterval(function() {
-  //   javascript:document.body.style.setProperty("-webkit-transform", "rotate(" + last_interval + "deg)", null);
-  //   last_interval++;
-  //   // console.log(last_interval);
-  // }, 30)
+  (new Clock('span.clock')).start();
 });
